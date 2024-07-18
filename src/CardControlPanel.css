@@ -1,0 +1,5 @@
+.effect-type-icon {
+  --icon-size: 24px;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}

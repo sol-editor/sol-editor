@@ -1,0 +1,286 @@
+:root {
+  /* 88mm with 5mm offsets at 300 DPI. */
+  --total-width: 1158px;
+  /* 63.5mm with 5mm offsets at 300 DPI. */
+  --total-height: 868px;
+
+  /* 88mm at 300 DPI. */
+  --print-width: 1040px;
+  /* 63.5mm at 300 DPI. */
+  --print-height: 750px;
+  /* 5mm at 300 DPI. */
+  --print-offset: 59px;
+
+  /* Color of the separator and token background in the front of the card. */
+  --separator-color: #776d42;
+  /* Color of the credit texts. */
+  --credit-color: #878494;
+  /* Margin from the top of the card including print offset. */
+  --top-margin: 120px;
+  /* Margin from the left of the card including print offset. */
+  --left-margin: 105px;
+  /* Maximum width of the description before covering token placeholder. */
+  --description-width: 625px;
+}
+
+/* Top-level container for a card. */
+.card-container {
+  position: relative;
+
+  width: var(--total-width);
+  height: var(--total-height);
+  margin: 0;
+  padding: 0;
+  offset: 0;
+
+  perspective: 3000px;
+}
+
+/* For display only, removed during export. */
+.half-size {
+  --scale: 0.5;
+  scale: var(--scale);
+
+  /* Ensuring that the original scale is not used to position other elements. */
+  margin-top: calc(
+    (var(--total-height) - var(--total-height) * var(--scale)) * -0.5
+  );
+  margin-bottom: calc(
+    (var(--total-height) - var(--total-height) * var(--scale)) * -0.5
+  );
+  margin-left: calc(
+    (var(--total-width) - var(--total-width) * var(--scale)) * -0.5
+  );
+  margin-right: calc(
+    (var(--total-width) - var(--total-width) * var(--scale)) * -0.5
+  );
+}
+
+/* Crops the printing offset for display. */
+.card-display-viewport {
+  position: absolute;
+  top: var(--print-offset);
+  left: var(--print-offset);
+
+  width: var(--print-width);
+  height: var(--print-height);
+
+  overflow: hidden;
+}
+
+/* For display only, removed during export. */
+.cropped {
+  border-radius: 12px;
+  /* overflow: hidden; */
+}
+
+/* Flip side card container. */
+.card-back {
+  position: absolute;
+  top: calc(-1 * var(--print-offset));
+  left: calc(-1 * var(--print-offset));
+
+  width: var(--total-width);
+  height: var(--total-height);
+}
+
+/* Backside background image. */
+.background {
+  position: absolute;
+}
+
+/* Centered logo at the back of the card. */
+.logo {
+  --logo-size: 477px;
+
+  position: absolute;
+  top: calc(var(--total-height) / 2 - var(--logo-size) / 2);
+  left: calc(var(--total-width) / 2 - var(--logo-size) / 2);
+
+  height: var(--logo-size);
+  width: var(--logo-size);
+
+  color: #1b1b1b;
+}
+
+/* Main side card container. */
+.card-front {
+  position: absolute;
+  top: calc(-1 * var(--print-offset));
+  left: calc(-1 * var(--print-offset));
+
+  width: var(--total-width);
+  height: var(--total-height);
+}
+
+/* Name of the instability effect. */
+.card-title {
+  position: absolute;
+  top: var(--top-margin);
+  left: var(--left-margin);
+
+  min-width: var(--description-width);
+
+  font-family: "Urbanist";
+  font-size: 78px;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+
+  outline: 0px solid transparent;
+  background-color: transparent;
+  border-style: none;
+}
+
+/* The color of elements on blue-coded cards. */
+.card-color-blue {
+  color: #0da5cf;
+}
+/* The color of elements on green-coded cards. */
+.card-color-green {
+  color: #41a847;
+}
+/* The color of elements on yellow-coded cards. */
+.card-color-yellow {
+  color: #fcd939;
+}
+/* The color of elements on red-coded cards. */
+.card-color-red {
+  color: #ac2a2a;
+}
+
+/* Line separator between the title and effect. */
+.line {
+  position: absolute;
+  left: var(--left-margin);
+  top: 250px;
+
+  height: 5px;
+  min-width: var(--description-width);
+
+  background-color: var(--separator-color);
+}
+
+/* Card effect description. */
+.card-effect {
+  position: absolute;
+  top: 280px;
+  left: var(--left-margin);
+
+  width: var(--description-width);
+  min-height: 480px;
+
+  font-family: "Almarai";
+  font-size: 45px;
+  font-weight: 300;
+  letter-spacing: 0.07em;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  color: #eee;
+
+  outline: 0px solid transparent;
+  background-color: transparent;
+  border-style: none;
+}
+
+.credit-container {
+  position: absolute;
+  bottom: 106px;
+  left: var(--left-margin);
+
+  color: var(--credit-color);
+  animation: fade-in 0.3s ease;
+}
+
+.credit-label {
+  margin-right: 6px;
+
+  font-family: "Urbanist";
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+}
+
+.credit {
+  display: inline-block;
+  min-width: calc(var(--description-width) - 100px);
+
+  color: var(--credit-color);
+  font-family: "Almarai";
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+
+  outline: 0px solid transparent;
+  background-color: transparent;
+  border-style: none;
+}
+
+/* Icon representing the type of the effect. */
+.type-icon {
+  --icon-size: 64px;
+
+  position: absolute;
+  top: 140px;
+  left: 888px;
+
+  width: var(--icon-size);
+  height: var(--icon-size);
+
+  animation: fade-in 0.3s ease;
+}
+
+.icon-move {
+  --icon-size: 84px;
+  margin-left: -6px;
+  margin-top: -10px;
+}
+
+.icon-convert {
+  --icon-size: 76px;
+  margin-left: -6px;
+}
+
+.icon-activate {
+  --icon-size: 66px;
+}
+
+.icon-draw {
+  --icon-size: 78px;
+}
+
+/* Animation on toggled elements. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
+/* Token placeholder images in the left bottom corner. */
+.token-background,
+.token-placeholder {
+  --token-offset: 476px;
+  --token-size: 480px;
+
+  width: var(--token-size);
+  height: var(--token-size);
+
+  position: absolute;
+  bottom: calc(var(--token-offset) - var(--token-size));
+  right: calc(var(--token-offset) - var(--token-size));
+}
+
+/* Properties unique to the outer token background image. */
+.token-background {
+  color: var(--separator-color);
+}
+
+/* Properties unique to the inner token placeholder image. */
+.token-placeholder {
+  transition: color 0.3s ease;
+}
