@@ -11,6 +11,8 @@
   /* 5mm at 300 DPI. */
   --print-offset: 59px;
 
+  /* Name of the font used for texts on the card. */
+  --card-font: "Gotham";
   /* Color of the separator and token background in the front of the card. */
   --separator-color: #776d42;
   /* Color of the credit texts. */
@@ -121,7 +123,7 @@
 
   min-width: var(--description-width);
 
-  font-family: "Urbanist";
+  font-family: var(--card-font);
   font-size: 78px;
   letter-spacing: 0.25em;
   font-weight: 700;
@@ -171,7 +173,7 @@
   width: var(--description-width);
   min-height: 480px;
 
-  font-family: "Almarai";
+  font-family: var(--card-font);
   font-size: 45px;
   font-weight: 300;
   letter-spacing: 0.07em;
@@ -196,7 +198,7 @@
 .credit-label {
   margin-right: 6px;
 
-  font-family: "Urbanist";
+  font-family: var(--card-font);
   text-transform: uppercase;
   font-weight: 900;
   font-size: 24px;
@@ -208,7 +210,7 @@
   min-width: calc(var(--description-width) - 100px);
 
   color: var(--credit-color);
-  font-family: "Almarai";
+  font-family: var(--card-font);
   font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.06em;
