@@ -9,6 +9,7 @@ import CardControlPanel from "./CardControlPanel";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CardExportPanel from "./CardExportPanel";
+import Footer from "./Footer";
 
 const darkTheme = createTheme({
   palette: {
@@ -40,6 +41,7 @@ export default function App() {
         />
         <CardExportPanel name={instabilityEffect.title} isFlipped={isFlipped} />
       </div>
+      <Footer />
     </ThemeProvider>
   );
 }
