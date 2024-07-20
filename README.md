@@ -1,4 +1,4 @@
-# Sol Creator
+# Sol Editor
 
 A card editor for the **Sol: Last Days of a Star** board game.
 

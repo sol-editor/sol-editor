@@ -1,4 +1,4 @@
-name: publish
+name: Publish
 
 on:
   push:
@@ -26,4 +26,4 @@ jobs:
           folder: build/
           token: ${{ secrets.accessToken }}
           branch: gh-pages
-          repository-name: czyzby/sol-editor.github.io
+          repository-name: sol-editor/sol-editor.github.io
