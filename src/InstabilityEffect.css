@@ -125,7 +125,7 @@
 
   font-family: var(--card-font);
   font-size: 78px;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   font-weight: 700;
   text-transform: uppercase;
   transition: color 0.3s ease;
@@ -174,10 +174,10 @@
   min-height: 480px;
 
   font-family: var(--card-font);
-  font-size: 45px;
+  font-size: 42px;
   font-weight: 300;
-  letter-spacing: 0.07em;
-  line-height: 1.5;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
   white-space: pre-wrap;
   color: #eee;
 
