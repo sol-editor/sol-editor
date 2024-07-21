@@ -12,6 +12,7 @@
 /build
 
 # Others
+src/version.ts
 .DS_Store
 .env.local
 .env.development.local

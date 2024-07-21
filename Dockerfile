@@ -18,7 +18,7 @@ RUN git init &&\
     git add package.json && git commit -m "init"
 
 # Building app:
-RUN npm run build
+RUN npm run generateVersion && npm run build
 
 # Using Nginx image to serve static content:
 FROM nginx:stable-alpine

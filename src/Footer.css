@@ -9,3 +9,13 @@
   font-weight: 400;
   color: #ff9100;
 }
+
+.build-version {
+  position: fixed;
+  bottom: 4px;
+  right: 4px;
+
+  color: #797979;
+  font-weight: 300;
+  font-size: 12px;
+}

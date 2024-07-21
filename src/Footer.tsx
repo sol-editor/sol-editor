@@ -1,5 +1,7 @@
 import "./Footer.css";
 import { Link, Paper } from "@mui/material";
+import GitInfo from "react-git-info/macro";
+import { version } from "./version";
 
 export default function Footer() {
   return (
@@ -31,6 +33,9 @@ export default function Footer() {
           Elephant Laboratories
         </Link>
       </div>
+      <span className="build-version">
+        {version}-{GitInfo().commit.shortHash}
+      </span>
     </Paper>
   );
 }
