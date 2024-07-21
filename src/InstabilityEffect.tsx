@@ -74,14 +74,6 @@ export function CardFront(props: {
   instabilityEffect: InstabilityEffect;
   setInstabilityEffect: InstabilityEffectSetter;
 }) {
-  const effect = props.instabilityEffect.effect;
-  function setEffect(event: ChangeEvent<HTMLTextAreaElement>) {
-    props.setInstabilityEffect({
-      ...props.instabilityEffect,
-      effect: event.target.value,
-    });
-  }
-
   function setCredit(event: ChangeEvent<HTMLInputElement>) {
     props.setInstabilityEffect({
       ...props.instabilityEffect,
@@ -97,7 +89,10 @@ export function CardFront(props: {
         instabilityEffect={props.instabilityEffect}
         setInstabilityEffect={props.setInstabilityEffect}
       />
-      <textarea className="card-effect" value={effect} onChange={setEffect} />
+      <CardDescription
+        instabilityEffect={props.instabilityEffect}
+        setInstabilityEffect={props.setInstabilityEffect}
+      />
       <Credit credit={props.instabilityEffect.credit} setCredit={setCredit} />
 
       <CardEffectIcon effectType={props.instabilityEffect.type} />
@@ -148,17 +143,70 @@ export function CardTitle(props: {
         className="card-title-text"
         text={title}
         setFontSize={setTitleFontSize}
-        setWidth={setTitleWidth}
-        minWidth={625}
-        maxWidth={750}
+        bound="width"
+        setSize={setTitleWidth}
+        minSize={625}
+        maxSize={750}
         minFontSize={40}
-        maxFontSize={78}
+        maxFontSize={maxTitleFontSize}
       />
       <div
         className="line"
         style={{
           width: `${titleWidth - 6}px`,
         }}
+      />
+    </>
+  );
+}
+
+const effectHeightWithoutCredit = 480;
+const effectHeightWithCredit = 430;
+const maxDescriptionFontSize = 42;
+
+export function CardDescription(props: {
+  instabilityEffect: InstabilityEffect;
+  setInstabilityEffect: InstabilityEffectSetter;
+}) {
+  const effect = props.instabilityEffect.effect;
+  function setEffect(event: ChangeEvent<HTMLTextAreaElement>) {
+    props.setInstabilityEffect({
+      ...props.instabilityEffect,
+      effect: event.target.value,
+    });
+  }
+
+  const [effectHeight, setEffectHeight] = useState(effectHeightWithoutCredit);
+  const [effectFontSize, setEffectFontSize] = useState(maxDescriptionFontSize);
+
+  function getSize() {
+    return props.instabilityEffect.credit == null
+      ? effectHeightWithoutCredit
+      : effectHeightWithCredit;
+  }
+
+  return (
+    <>
+      <textarea
+        className="card-effect card-effect-text"
+        value={effect}
+        onChange={setEffect}
+        style={{
+          height: effectHeight,
+          fontSize: effectFontSize,
+        }}
+      />
+
+      <TextMeasurer
+        className="card-effect-text card-effect-measurer"
+        text={effect}
+        setFontSize={setEffectFontSize}
+        setSize={setEffectHeight}
+        bound="height"
+        minSize={getSize()}
+        maxSize={getSize()}
+        minFontSize={28}
+        maxFontSize={maxDescriptionFontSize}
       />
     </>
   );
@@ -207,9 +255,10 @@ export function TextMeasurer(props: {
   className: string;
   text: string;
   setFontSize: Setter<number>;
-  setWidth: Setter<number>;
-  minWidth: number;
-  maxWidth: number;
+  setSize: Setter<number>;
+  bound: "width" | "height";
+  minSize: number;
+  maxSize: number;
   minFontSize: number;
   maxFontSize: number;
 }) {
@@ -219,29 +268,31 @@ export function TextMeasurer(props: {
     text,
     minFontSize,
     maxFontSize,
-    minWidth,
-    maxWidth,
-    setWidth,
+    bound,
+    minSize,
+    maxSize,
+    setSize,
     setFontSize,
   } = props;
 
   function updateSize() {
     const div = container.current as HTMLDivElement;
     let fontSize = maxFontSize;
-    let currentWidth = div.scrollWidth;
+    let useWidth = bound === "width";
+    let currentSize = 0;
     do {
       div.style.fontSize = `${fontSize}px`;
-      currentWidth = div.scrollWidth;
-      if (currentWidth <= maxWidth) {
-        setWidth(Math.max(minWidth, currentWidth));
+      currentSize = useWidth ? div.scrollWidth : div.scrollHeight;
+      if (currentSize <= maxSize) {
+        setSize(Math.max(minSize, currentSize));
         setFontSize(fontSize);
-        break;
+        return;
       } else if (--fontSize < minFontSize) {
-        setWidth(maxWidth);
+        setSize(maxSize);
         setFontSize(minFontSize);
-        break;
+        return;
       }
-    } while (currentWidth > maxWidth);
+    } while (currentSize > maxSize);
   }
 
   useEffect(updateSize, [
@@ -249,9 +300,10 @@ export function TextMeasurer(props: {
     text,
     minFontSize,
     maxFontSize,
-    minWidth,
-    maxWidth,
-    setWidth,
+    bound,
+    minSize,
+    maxSize,
+    setSize,
     setFontSize,
   ]);
   return (

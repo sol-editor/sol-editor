@@ -17,8 +17,6 @@
   --separator-color: #776d42;
   /* Color of the credit texts. */
   --credit-color: #878494;
-  /* Margin from the top of the card including print offset. */
-  --top-margin: 120px;
   /* Margin from the left of the card including print offset. */
   --left-margin: 105px;
   /* Maximum width of the description before covering token placeholder. */
@@ -118,6 +116,7 @@
 /* Name of the instability effect. */
 .card-title {
   position: absolute;
+  /* Placed from the bottom to account for font size changes. */
   bottom: 659px;
   left: var(--left-margin);
 
@@ -174,22 +173,33 @@
   top: 280px;
   left: var(--left-margin);
 
-  width: var(--description-width);
-  min-height: 480px;
+  min-height: 430px;
 
-  font-family: var(--card-font);
-  font-size: 42px;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  line-height: 1.6;
-  white-space: pre-wrap;
   color: #eee;
-
+  white-space: pre-wrap;
   outline: 0px solid transparent;
   background-color: transparent;
   border-style: none;
 }
 
+/* Card effect description font settings. */
+.card-effect-text {
+  width: var(--description-width);
+  max-width: var(--description-width);
+  font-family: var(--card-font);
+  /* font-size: 42px; */
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+/* Extra text measurer properties to match textarea behavior. */
+.card-effect-measurer {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Stores card author labels. */
 .credit-container {
   position: absolute;
   bottom: 106px;
@@ -199,6 +209,7 @@
   animation: fade-in 0.3s ease;
 }
 
+/* Fixed credit label prior to the author. */
 .credit-label {
   margin-right: 6px;
 
@@ -209,6 +220,7 @@
   letter-spacing: 0.08em;
 }
 
+/* Editable author name. */
 .credit {
   display: inline-block;
   min-width: calc(var(--description-width) - 100px);
@@ -238,21 +250,25 @@
   animation: fade-in 0.3s ease;
 }
 
+/* Move effect icon individual settings. */
 .icon-move {
   --icon-size: 84px;
   margin-left: -6px;
   margin-top: -10px;
 }
 
+/* Convert effect icon individual settings. */
 .icon-convert {
   --icon-size: 76px;
   margin-left: -6px;
 }
 
+/* Activate effect icon individual settings. */
 .icon-activate {
   --icon-size: 66px;
 }
 
+/* Draw effect icon individual settings. */
 .icon-draw {
   --icon-size: 78px;
 }
