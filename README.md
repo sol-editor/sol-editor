@@ -11,7 +11,7 @@ The editor currently supports creating **Instability Effect** cards with the fol
 
 ## Running locally
 
-### Local development ia NPM
+### Local development via NPM
 
 Node.js needs to be installed to compile the application.\
 Clone the repository and run `npm install` to fetch the project dependencies.
@@ -44,3 +44,16 @@ Instead, it allows running the application locally with minimal effort and no de
 
 Run `docker compose up` to host the application with Nginx.\
 Open [http://localhost](http://localhost) to view it in the browser.
+
+## Credits
+
+[Sol: Last Days of a Star](https://elephantlaboratories.com/sol)
+is the work of [Elephant Laboratories](https://elephantlaboratories.com).
+
+Editor authors:
+
+* [@czyzby](https://github.com/czyzby): idea, programming, icons.
+* [@marsza](https://github.com/marszaa): backgrounds.
+
+Made with [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/),
+and [MUI](https://mui.com/).
