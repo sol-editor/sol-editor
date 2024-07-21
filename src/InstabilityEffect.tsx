@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import Flippable from "./Flippable";
 import "./InstabilityEffect.css";
 
@@ -36,9 +36,8 @@ export type InstabilityEffect = {
   credit?: string;
 };
 
-export type InstabilityEffectSetter = React.Dispatch<
-  React.SetStateAction<InstabilityEffect>
->;
+export type Setter<Type> = React.Dispatch<React.SetStateAction<Type>>;
+export type InstabilityEffectSetter = Setter<InstabilityEffect>;
 
 export function CardContainer(props: {
   isFlipped: boolean;
@@ -58,37 +57,29 @@ export function CardContainer(props: {
   );
 }
 
+function getColorClass(color: InstabilityEffectColor): string {
+  switch (color) {
+    case InstabilityEffectColor.Blue:
+      return "card-color-blue";
+    case InstabilityEffectColor.Green:
+      return "card-color-green";
+    case InstabilityEffectColor.Yellow:
+      return "card-color-yellow";
+    case InstabilityEffectColor.Red:
+      return "card-color-red";
+  }
+}
+
 export function CardFront(props: {
   instabilityEffect: InstabilityEffect;
   setInstabilityEffect: InstabilityEffectSetter;
 }) {
-  const title = props.instabilityEffect.title;
-  function setTitle(event: ChangeEvent<HTMLInputElement>) {
-    props.setInstabilityEffect({
-      ...props.instabilityEffect,
-      title: event.target.value,
-    });
-  }
-
   const effect = props.instabilityEffect.effect;
   function setEffect(event: ChangeEvent<HTMLTextAreaElement>) {
     props.setInstabilityEffect({
       ...props.instabilityEffect,
       effect: event.target.value,
     });
-  }
-
-  function getColorClass(): string {
-    switch (props.instabilityEffect.color) {
-      case InstabilityEffectColor.Blue:
-        return "card-color-blue";
-      case InstabilityEffectColor.Green:
-        return "card-color-green";
-      case InstabilityEffectColor.Yellow:
-        return "card-color-yellow";
-      case InstabilityEffectColor.Red:
-        return "card-color-red";
-    }
   }
 
   function setCredit(event: ChangeEvent<HTMLInputElement>) {
@@ -102,20 +93,74 @@ export function CardFront(props: {
     <div className="card-front">
       <BackgroundImage source={frontSideBackground} />
 
-      <input
-        className={"card-title " + getColorClass()}
-        type="text"
-        value={title}
-        onChange={setTitle}
+      <CardTitle
+        instabilityEffect={props.instabilityEffect}
+        setInstabilityEffect={props.setInstabilityEffect}
       />
-      <div className="line" />
       <textarea className="card-effect" value={effect} onChange={setEffect} />
       <Credit credit={props.instabilityEffect.credit} setCredit={setCredit} />
 
       <CardEffectIcon effectType={props.instabilityEffect.type} />
       <TokenBackground className="token-background" />
-      <TokenPlaceholder className={"token-placeholder " + getColorClass()} />
+      <TokenPlaceholder
+        className={
+          "token-placeholder " + getColorClass(props.instabilityEffect.color)
+        }
+      />
     </div>
+  );
+}
+
+const minTitleWidth = 625;
+const maxTitleFontSize = 78;
+
+export function CardTitle(props: {
+  instabilityEffect: InstabilityEffect;
+  setInstabilityEffect: InstabilityEffectSetter;
+}) {
+  const [titleWidth, setTitleWidth] = useState(minTitleWidth);
+  const [titleFontSize, setTitleFontSize] = useState(maxTitleFontSize);
+
+  const title = props.instabilityEffect.title;
+  function setTitle(event: ChangeEvent<HTMLInputElement>) {
+    props.setInstabilityEffect({
+      ...props.instabilityEffect,
+      title: event.target.value,
+    });
+  }
+
+  return (
+    <>
+      <input
+        className={
+          "card-title card-title-text " +
+          getColorClass(props.instabilityEffect.color)
+        }
+        type="text"
+        value={title}
+        onChange={setTitle}
+        maxLength={25}
+        style={{
+          fontSize: `${titleFontSize}px`,
+        }}
+      />
+      <TextMeasurer
+        className="card-title-text"
+        text={title}
+        setFontSize={setTitleFontSize}
+        setWidth={setTitleWidth}
+        minWidth={625}
+        maxWidth={750}
+        minFontSize={40}
+        maxFontSize={78}
+      />
+      <div
+        className="line"
+        style={{
+          width: `${titleWidth - 6}px`,
+        }}
+      />
+    </>
   );
 }
 
@@ -156,6 +201,64 @@ export function Credit(props: {
 
 export function BackgroundImage(props: { source: string }) {
   return <img className="background" src={props.source} alt="" />;
+}
+
+export function TextMeasurer(props: {
+  className: string;
+  text: string;
+  setFontSize: Setter<number>;
+  setWidth: Setter<number>;
+  minWidth: number;
+  maxWidth: number;
+  minFontSize: number;
+  maxFontSize: number;
+}) {
+  const container = useRef(null as HTMLDivElement | null);
+  const {
+    className,
+    text,
+    minFontSize,
+    maxFontSize,
+    minWidth,
+    maxWidth,
+    setWidth,
+    setFontSize,
+  } = props;
+
+  function updateSize() {
+    const div = container.current as HTMLDivElement;
+    let fontSize = maxFontSize;
+    let currentWidth = div.scrollWidth;
+    do {
+      div.style.fontSize = `${fontSize}px`;
+      currentWidth = div.scrollWidth;
+      if (currentWidth <= maxWidth) {
+        setWidth(Math.max(minWidth, currentWidth));
+        setFontSize(fontSize);
+        break;
+      } else if (--fontSize < minFontSize) {
+        setWidth(maxWidth);
+        setFontSize(minFontSize);
+        break;
+      }
+    } while (currentWidth > maxWidth);
+  }
+
+  useEffect(updateSize, [
+    className,
+    text,
+    minFontSize,
+    maxFontSize,
+    minWidth,
+    maxWidth,
+    setWidth,
+    setFontSize,
+  ]);
+  return (
+    <div className={"hidden " + className} ref={container}>
+      {text}
+    </div>
+  );
 }
 
 export function CardBack() {

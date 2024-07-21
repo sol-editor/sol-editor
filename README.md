@@ -52,8 +52,8 @@ is the work of [Elephant Laboratories](https://elephantlaboratories.com).
 
 Editor authors:
 
-* [@czyzby](https://github.com/czyzby): idea, programming, icons.
-* [@marsza](https://github.com/marszaa): backgrounds.
+- [@czyzby](https://github.com/czyzby): idea, programming, icons.
+- [@marsza](https://github.com/marszaa): backgrounds.
 
 Made with [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/),
 and [MUI](https://mui.com/).

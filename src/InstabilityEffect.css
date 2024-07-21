@@ -118,21 +118,24 @@
 /* Name of the instability effect. */
 .card-title {
   position: absolute;
-  top: var(--top-margin);
+  bottom: 659px;
   left: var(--left-margin);
 
   min-width: var(--description-width);
-
-  font-family: var(--card-font);
-  font-size: 78px;
-  letter-spacing: 0.2em;
-  font-weight: 700;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
+  max-width: 750px;
 
   outline: 0px solid transparent;
   background-color: transparent;
   border-style: none;
+  transition: color 0.3s ease;
+}
+
+/* Instability effect name font settings. */
+.card-title-text {
+  font-family: var(--card-font);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 /* The color of elements on blue-coded cards. */
@@ -157,6 +160,7 @@
   position: absolute;
   left: var(--left-margin);
   top: 250px;
+  transition: width 0.2s ease;
 
   height: 5px;
   min-width: var(--description-width);
@@ -285,4 +289,16 @@
 /* Properties unique to the inner token placeholder image. */
 .token-placeholder {
   transition: color 0.3s ease;
+}
+
+/* For hidden utility elements. */
+.hidden {
+  pointer-events: none;
+  background-color: transparent;
+  opacity: 0;
+  margin: 0;
+
+  position: absolute;
+  top: 0;
+  left: 0;
 }
