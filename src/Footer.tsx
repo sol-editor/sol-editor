@@ -11,27 +11,22 @@ export default function Footer() {
         position: "fixed",
         bottom: 0,
         width: "100%",
+        height: "40px",
       }}
       component="footer"
       square
       variant="outlined"
     >
       <div className="footer-content">
-        <Link
-          href="https://elephantlaboratories.com/sol"
-          underline="none"
-          color="warning"
-        >
-          Sol: Last Days of a Star
-        </Link>{" "}
-        was created by{" "}
-        <Link
-          href="https://elephantlaboratories.com/"
-          underline="none"
-          color="warning"
-        >
-          Elephant Laboratories
-        </Link>
+        <span>
+          <Link href="https://elephantlaboratories.com/sol" underline="none">
+            Sol: Last Days of a Star
+          </Link>{" "}
+          was created by{" "}
+          <Link href="https://elephantlaboratories.com/" underline="none">
+            Elephant Laboratories
+          </Link>
+        </span>
       </div>
       <span className="build-version">
         {version}-{GitInfo().commit.shortHash}
