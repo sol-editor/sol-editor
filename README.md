@@ -2,6 +2,10 @@
 
 A card editor for the **Sol: Last Days of a Star** board game.
 
+This branch contains the Polish translation for the application.
+Due to its rather niche use and differences in font settings to
+support Polish characters, it's not deployed automatically.
+
 The editor currently supports creating **Instability Effect** cards with the following features:
 
 - Editable title, content, and author.
@@ -9,6 +13,7 @@ The editor currently supports creating **Instability Effect** cards with the fol
 - Selection of the card color and effect type.
 - Flip toggle for exporting back side of the card.
 - Export to PNG in 300 DPI with a 5mm offset on each side.
+- Polish translation with support for the Polish special characters.
 
 ## Running locally
 
