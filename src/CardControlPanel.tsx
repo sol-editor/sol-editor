@@ -29,7 +29,7 @@ export default function CardControlPanel(props: {
   isFlipped: Boolean;
   setFlipped: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [creditStore, cacheCredit] = useState("Author");
+  const [creditStore, cacheCredit] = useState("Autor");
 
   function setColor(
     _: React.MouseEvent<HTMLElement>,

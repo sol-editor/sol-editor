@@ -236,7 +236,7 @@ export function Credit(props: {
   }
   return (
     <div className="credit-container">
-      <span className="credit-label">Credit:</span>
+      <span className="credit-label">Autor:</span>
       <input
         className="credit"
         type="text"
