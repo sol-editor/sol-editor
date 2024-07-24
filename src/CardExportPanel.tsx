@@ -43,6 +43,7 @@ export default function CardExportPanel(props: {
           value=""
           onClick={exportPng}
           disabled={isLoading}
+          aria-label="export"
         >
           <ExportIcon fontSize="large" />
         </ToggleButton>

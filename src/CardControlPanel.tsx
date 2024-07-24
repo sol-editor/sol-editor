@@ -111,7 +111,7 @@ export default function CardControlPanel(props: {
       <StyledToggleButtonGroup
         value={props.instabilityEffect.credit != null}
         exclusive
-        aria-label="card side"
+        aria-label="author"
       >
         <ToggleButton
           value={true}

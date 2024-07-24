@@ -187,7 +187,6 @@
   width: var(--description-width);
   max-width: var(--description-width);
   font-family: var(--card-font);
-  /* font-size: 42px; */
   font-weight: 300;
   letter-spacing: 0.08em;
   line-height: 1.6;
