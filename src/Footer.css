@@ -3,6 +3,8 @@
   font-weight: 300;
   width: 100%;
   height: 100%;
+  line-height: 150%;
+  text-align: center;
   align-items: center;
   justify-content: center;
 }
@@ -14,10 +16,19 @@
 
 .build-version {
   position: fixed;
-  bottom: 4px;
-  right: 4px;
+  bottom: 3px;
+  right: 3px;
 
   color: #797979;
   font-weight: 300;
-  font-size: 12px;
+  font-size: x-small;
+}
+
+@media (width <= 600px) {
+  .footer-content {
+    font-size: small;
+  }
+  .build-version {
+    font-size: xx-small;
+  }
 }

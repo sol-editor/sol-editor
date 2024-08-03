@@ -11,7 +11,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CardExportPanel from "./CardExportPanel";
 import Footer from "./Footer";
 
-const darkTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
   },
@@ -26,7 +26,7 @@ export default function App() {
   } as InstabilityEffect);
   const [isFlipped, setFlipped] = useState(false);
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <div className="editor-container">
         <CardControlPanel
           instabilityEffect={instabilityEffect}

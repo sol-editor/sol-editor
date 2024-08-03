@@ -42,6 +42,7 @@
 .half-size {
   --scale: 0.5;
   scale: var(--scale);
+  transition: scale 0.2s ease;
 
   /* Ensuring that the original scale is not used to position other elements. */
   margin-top: calc(
@@ -56,6 +57,18 @@
   margin-right: calc(
     (var(--total-width) - var(--total-width) * var(--scale)) * -0.5
   );
+}
+
+/* Downscaling card even further on smaller screens.*/
+@media (width <= 580px) {
+  .half-size {
+    --scale: 0.4;
+  }
+}
+@media (width <= 465px) {
+  .half-size {
+    --scale: 0.3;
+  }
 }
 
 /* Crops the printing offset for display. */

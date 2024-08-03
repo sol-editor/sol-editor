@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "@mui/material";
 
 import Divider from "@mui/material/Divider";
 import StyledToggleButtonGroup from "./StyledToggleButtonGroup";
@@ -8,6 +9,7 @@ import StarHalfIcon from "@mui/icons-material/Brightness6";
 import StarFullIcon from "@mui/icons-material/Brightness4";
 import RotateIcon from "@mui/icons-material/ThreeSixty";
 import AuthorIcon from "@mui/icons-material/Edit";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "./CardControlPanel.css";
 import {
@@ -21,7 +23,7 @@ import { ReactComponent as ConvertIcon } from "./assets/front/icons/convert.svg"
 import { ReactComponent as ActivateIcon } from "./assets/front/icons/activate.svg";
 import { ReactComponent as DrawIcon } from "./assets/front/icons/draw.svg";
 import { ReactComponent as AnyIcon } from "./assets/front/icons/any.svg";
-import ButtonContainer from "./ButtonContainer";
+import ResponsiveButtonPanel from "./ResponsiveButtonPanel";
 
 export default function CardControlPanel(props: {
   instabilityEffect: InstabilityEffect;
@@ -30,6 +32,8 @@ export default function CardControlPanel(props: {
   setFlipped: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [creditStore, cacheCredit] = useState("Author");
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
   function setColor(
     _: React.MouseEvent<HTMLElement>,
@@ -73,56 +77,63 @@ export default function CardControlPanel(props: {
   }
 
   return (
-    <ButtonContainer>
-      <StyledToggleButtonGroup
-        value={props.instabilityEffect.color}
-        exclusive
-        onChange={setColor}
-        aria-label="card color"
-      >
-        <ToggleButton value={InstabilityEffectColor.Blue} aria-label="blue">
-          <StarEmptyIcon htmlColor="#0da5cf" />
-        </ToggleButton>
-        <ToggleButton value={InstabilityEffectColor.Green} aria-label="green">
-          <StarEmptyIcon htmlColor="#41a847" />
-        </ToggleButton>
-        <ToggleButton value={InstabilityEffectColor.Yellow} aria-label="yellow">
-          <StarHalfIcon htmlColor="#fcd939" />
-        </ToggleButton>
-        <ToggleButton value={InstabilityEffectColor.Red} aria-label="red">
-          <StarFullIcon htmlColor="#ac2a2a" />
-        </ToggleButton>
-      </StyledToggleButtonGroup>
-      <StyledToggleButtonGroup
-        value={props.isFlipped}
-        exclusive
-        aria-label="card side"
-      >
-        <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
-        <ToggleButton
-          value={true}
-          onClick={toggleFlipped}
-          aria-label="toggle rotation"
+    <ResponsiveButtonPanel>
+      <>
+        <StyledToggleButtonGroup
+          value={props.instabilityEffect.color}
+          exclusive
+          onChange={setColor}
+          aria-label="card color"
         >
-          <RotateIcon />
-        </ToggleButton>
-      </StyledToggleButtonGroup>
-
-      <StyledToggleButtonGroup
-        value={props.instabilityEffect.credit != null}
-        exclusive
-        aria-label="author"
-      >
-        <ToggleButton
-          value={true}
-          onClick={toggleCredit}
-          aria-label="toggle credit"
+          <ToggleButton value={InstabilityEffectColor.Blue} aria-label="blue">
+            <StarEmptyIcon htmlColor="#0da5cf" />
+          </ToggleButton>
+          <ToggleButton value={InstabilityEffectColor.Green} aria-label="green">
+            <StarEmptyIcon htmlColor="#41a847" />
+          </ToggleButton>
+          <ToggleButton
+            value={InstabilityEffectColor.Yellow}
+            aria-label="yellow"
+          >
+            <StarHalfIcon htmlColor="#fcd939" />
+          </ToggleButton>
+          <ToggleButton value={InstabilityEffectColor.Red} aria-label="red">
+            <StarFullIcon htmlColor="#ac2a2a" />
+          </ToggleButton>
+        </StyledToggleButtonGroup>
+        <StyledToggleButtonGroup
+          value={props.isFlipped}
+          exclusive
+          aria-label="card side"
         >
-          <AuthorIcon />
-        </ToggleButton>
-      </StyledToggleButtonGroup>
+          <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
+          <ToggleButton
+            value={true}
+            onClick={toggleFlipped}
+            aria-label="toggle rotation"
+          >
+            <RotateIcon />
+          </ToggleButton>
+        </StyledToggleButtonGroup>
 
-      <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
+        <StyledToggleButtonGroup
+          value={props.instabilityEffect.credit != null}
+          exclusive
+          aria-label="author"
+        >
+          <ToggleButton
+            value={true}
+            onClick={toggleCredit}
+            aria-label="toggle credit"
+          >
+            <AuthorIcon />
+          </ToggleButton>
+        </StyledToggleButtonGroup>
+
+        {isLargeScreen && (
+          <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
+        )}
+      </>
 
       <StyledToggleButtonGroup
         value={props.instabilityEffect.type}
@@ -152,6 +163,6 @@ export default function CardControlPanel(props: {
           <AnyIcon className="effect-type-icon" />
         </ToggleButton>
       </StyledToggleButtonGroup>
-    </ButtonContainer>
+    </ResponsiveButtonPanel>
   );
 }

@@ -11,7 +11,7 @@ export default function Footer() {
         position: "fixed",
         bottom: 0,
         width: "100%",
-        height: "40px",
+        height: "50px",
       }}
       component="footer"
       square
