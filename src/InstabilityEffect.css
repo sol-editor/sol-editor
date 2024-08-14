@@ -109,8 +109,8 @@
   --logo-size: 477px;
 
   position: absolute;
-  top: calc(var(--total-height) / 2 - var(--logo-size) / 2);
-  left: calc(var(--total-width) / 2 - var(--logo-size) / 2);
+  top: calc(var(--total-height) / 2 - var(--logo-size) / 2 + 4px);
+  left: calc(var(--total-width) / 2 - var(--logo-size) / 2 - 2px);
 
   height: var(--logo-size);
   width: var(--logo-size);
