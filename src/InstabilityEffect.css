@@ -14,7 +14,7 @@
   /* Name of the font used for texts on the card. */
   --card-font: "Gotham";
   /* Color of the separator and token background in the front of the card. */
-  --separator-color: #776d42;
+  --separator-color: #a89a59;
   /* Color of the credit texts. */
   --credit-color: #878494;
   /* Margin from the left of the card including print offset. */
@@ -153,11 +153,11 @@
 
 /* The color of elements on blue-coded cards. */
 .card-color-blue {
-  color: #0da5cf;
+  color: #12a6d0;
 }
 /* The color of elements on green-coded cards. */
 .card-color-green {
-  color: #41a847;
+  color: #38b449;
 }
 /* The color of elements on yellow-coded cards. */
 .card-color-yellow {
