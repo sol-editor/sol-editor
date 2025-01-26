@@ -14,9 +14,9 @@
   /* Name of the font used for texts on the card. */
   --card-font: "Gotham";
   /* Color of the separator and token background in the front of the card. */
-  --separator-color: #a89a59;
+  --separator-color: #aea271;
   /* Color of the credit texts. */
-  --credit-color: #878494;
+  --credit-color: #a2a0aa;
   /* Margin from the left of the card including print offset. */
   --left-margin: 105px;
   /* Default width of card elements such as title or its underline. */
@@ -153,11 +153,11 @@
 
 /* The color of elements on blue-coded cards. */
 .card-color-blue {
-  color: #12a6d0;
+  color: #10a6cf;
 }
 /* The color of elements on green-coded cards. */
 .card-color-green {
-  color: #38b449;
+  color: #39b54a;
 }
 /* The color of elements on yellow-coded cards. */
 .card-color-yellow {
@@ -165,7 +165,7 @@
 }
 /* The color of elements on red-coded cards. */
 .card-color-red {
-  color: #ac2a2a;
+  color: #d82931;
 }
 
 /* Line separator between the title and effect. */
@@ -265,8 +265,8 @@
 
 /* Move effect icon individual settings. */
 .icon-move {
-  --icon-size: 84px;
-  margin-left: -6px;
+  --icon-size: 86px;
+  margin-left: -7px;
   margin-top: -10px;
 }
 
@@ -278,12 +278,18 @@
 
 /* Activate effect icon individual settings. */
 .icon-activate {
-  --icon-size: 66px;
+  --icon-size: 68px;
 }
 
 /* Draw effect icon individual settings. */
 .icon-draw {
-  --icon-size: 78px;
+  --icon-size: 84px;
+  margin-left: -5px;
+}
+
+/* Any effect icon individual settings. */
+.icon-any {
+  --icon-size: 66px;
 }
 
 /* Animation on toggled elements. */
