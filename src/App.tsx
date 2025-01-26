@@ -19,8 +19,8 @@ const theme = createTheme({
 
 export default function App() {
   const [instabilityEffect, setInstabilityEffect] = useState({
-    title: "Name",
-    effect: "Click here to edit!",
+    title: "Nazwa",
+    effect: "Kliknij, aby edytować!",
     type: InstabilityEffectType.Move,
     color: InstabilityEffectColor.Blue,
   } as InstabilityEffect);

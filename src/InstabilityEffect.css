@@ -11,8 +11,6 @@
   /* 5mm at 300 DPI. */
   --print-offset: 59px;
 
-  /* Name of the font used for texts on the card. */
-  --card-font: "Gotham";
   /* Color of the separator and token background in the front of the card. */
   --separator-color: #aea271;
   /* Color of the credit texts. */
@@ -132,7 +130,7 @@
 .card-title {
   position: absolute;
   /* Placed from the bottom to account for font size changes. */
-  bottom: 659px;
+  bottom: 653px;
   left: var(--left-margin);
 
   width: 750px;
@@ -145,9 +143,9 @@
 
 /* Instability effect name font settings. */
 .card-title-text {
-  font-family: var(--card-font);
-  letter-spacing: 0.2em;
-  font-weight: 700;
+  font-family: "Urbanist";
+  letter-spacing: 0.3em;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -200,10 +198,10 @@
 .card-effect-text {
   width: var(--description-width);
   max-width: var(--description-width);
-  font-family: var(--card-font);
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  line-height: 1.6;
+  font-family: "Roboto";
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.55;
 }
 
 /* Extra text measurer properties to match textarea behavior. */
@@ -226,7 +224,7 @@
 .credit-label {
   margin-right: 6px;
 
-  font-family: var(--card-font);
+  font-family: "Urbanist";
   text-transform: uppercase;
   font-weight: 700;
   font-size: 22px;
@@ -239,7 +237,7 @@
   min-width: calc(var(--content-width) - 100px);
 
   color: var(--credit-color);
-  font-family: var(--card-font);
+  font-family: "Roboto";
   font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.06em;
